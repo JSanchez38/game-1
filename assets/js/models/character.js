@@ -136,31 +136,33 @@ class Character {
             this.sprite.horizontalFrameIndex++
             
             if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
-                this.sprite.horizontalFrameIndex = 0
+                this.sprite.horizontalFrameIndex = 1
             }
         } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.left)) {
             this.animationTick = 0
-            this.sprite.horizontalFrameIndex++
             this.sprite.verticalFrameIndex = 1
+            this.sprite.horizontalFrameIndex++
 
             if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
-                this.sprite.horizontalFrameIndex = 0
+                this.sprite.horizontalFrameIndex = 1
             }
         } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.right)) {
             this.animationTick = 0
-            this.sprite.horizontalFrameIndex++
             this.sprite.verticalFrameIndex = 2
+            this.sprite.horizontalFrameIndex++
 
-            if(this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
-                this.sprite.horizontalFrameIndex = 0
+
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
+                this.sprite.horizontalFrameIndex = 1
             }
         } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.up)) {
             this.animationTick = 0
-            this.sprite.horizontalFrameIndex++
             this.sprite.verticalFrameIndex = 3
+            this.sprite.horizontalFrameIndex++
+            
 
             if(this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
-                this.sprite.horizontalFrameIndex = 0
+                this.sprite.horizontalFrameIndex = 1
             }
         } else if (!this.movements.down && !this.movements.left && !this.movements.right && !this.movements.up) {
             this.sprite.horizontalFrameIndex = 1
