@@ -8,8 +8,23 @@ class Character {
         this.y = y
         this.vy = CHARACTER_MOVE_XY
 
-        this.w = CHARACTER_W
-        this.h = CHARACTER_H
+        this.w = Math.ceil(33 * 2)
+        this.h = Math.ceil(33 * 2)
+
+        this.sprite = new Image()
+        this.sprite.src = '/assets/img/isaac-sprites.png'
+
+        this.sprite.verticalFrames = 4
+        this.sprite.horizontalFrames = 3
+
+        this.sprite.verticalFrameIndex = 0
+        this.sprite.horizontalFrameIndex = 0
+
+        this.sprite.onload = () => {
+            this.sprite.isReady = true
+            this.sprite.frameWidth = Math.ceil(this.sprite.width / this.sprite.horizontalFrames)
+            this.sprite.frameHeight = Math.ceil(this.sprite.height / this.sprite.verticalFrames)
+        }
 
         this.movements = {
             right: false,
@@ -20,6 +35,8 @@ class Character {
         }
 
         this.bullets = []
+
+        this.animationTick = 0
 
     }
 
@@ -64,7 +81,6 @@ class Character {
 
 
     move() {
-
         this.bullets.forEach((bullet) => bullet.move())
 
         if (this.movements.right) {
@@ -93,8 +109,62 @@ class Character {
     }
 
     draw() {
-        this.ctx.fillRect(this.x, this.y, this.w, this.h)
+
+        if (this.sprite.isReady) {
+            this.ctx.drawImage(
+                this.sprite,
+                this.sprite.horizontalFrameIndex * this.sprite.frameWidth,
+                this.sprite.verticalFrameIndex * this.sprite.frameWidth,
+                this.sprite.frameWidth,
+                this.sprite.frameHeight,
+                this.x,
+                this.y,
+                this.w,
+                this.h)
+        }
 
         this.bullets.forEach((bullet) => bullet.draw())
+
+        this.animate()
+    }
+
+    animate() {
+        this.animationTick++
+
+        if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.down)) {
+            this.animationTick = 0
+            this.sprite.horizontalFrameIndex++
+            
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
+                this.sprite.horizontalFrameIndex = 0
+            }
+        } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.left)) {
+            this.animationTick = 0
+            this.sprite.horizontalFrameIndex++
+            this.sprite.verticalFrameIndex = 1
+
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
+                this.sprite.horizontalFrameIndex = 0
+            }
+        } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.right)) {
+            this.animationTick = 0
+            this.sprite.horizontalFrameIndex++
+            this.sprite.verticalFrameIndex = 2
+
+            if(this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
+                this.sprite.horizontalFrameIndex = 0
+            }
+        } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.up)) {
+            this.animationTick = 0
+            this.sprite.horizontalFrameIndex++
+            this.sprite.verticalFrameIndex = 3
+
+            if(this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
+                this.sprite.horizontalFrameIndex = 0
+            }
+        } else if (!this.movements.down && !this.movements.left && !this.movements.right && !this.movements.up) {
+            this.sprite.horizontalFrameIndex = 1
+            this.sprite.verticalFrameIndex = 0
+        }
     }
 }

@@ -39,7 +39,6 @@ class Bullet {
             
     }
 
-
     move() {
         if (this.movements.right) {
             this.x += this.vx

@@ -4,9 +4,7 @@ const CANVAS_H = 600
 
 const FPS_GAME = 1000 / 60
 
-// tamaño y movimento pj
-const CHARACTER_W = 30
-const CHARACTER_H = 30
+// movimento pj
 const CHARACTER_MOVE_XY = 5
 
 // controles movimiento
@@ -22,6 +20,7 @@ const KEY_FIRE_UP = 38
 const KEY_FIRE_DOWN = 40
 
 // velocidad bala
-const SPEED_BULLET = 5
+const SPEED_BULLET = 10
 
 const CHARACTER_BULLET_BACK_OFF = 300
+const CHARACTER_RUN_ANIMATION_TICK = 10

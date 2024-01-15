@@ -9,7 +9,7 @@ class Game {
         this.fps = FPS_GAME
 
         this.background = new Background(this.ctx)
-        this.character = new Character(this.ctx, 450, 300)
+        this.character = new Character(this.ctx, 300, 300)
         
 
     }
@@ -43,6 +43,7 @@ class Game {
     }
 
     clear() {
+        this.character.clear()
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 }
