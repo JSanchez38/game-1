@@ -39,6 +39,18 @@ class Game {
                 this.gameOver()
             }
         })
+
+        this.character.bullets = this.character.bullets.filter((bullet) => {
+            for (let i = 0; i < this.enemies.length; i++) {
+                const enemy = this.enemies[i]
+
+                if (enemy.collidesWith(bullet)) {
+                    enemy.lives--
+                    return false
+                }
+            }
+            return true
+        })
     }
 
     addRandomEnemy() {
@@ -69,7 +81,7 @@ class Game {
 
     clear() {
         this.character.clear()
-        this.enemies = this.enemies.filter((enemy) => (enemy.x - enemy.w) < this.canvas.width)
+        this.enemies = this.enemies.filter((enemy) => (enemy.x - enemy.w) < this.canvas.width && !enemy.isDead())
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 

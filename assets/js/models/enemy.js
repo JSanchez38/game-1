@@ -23,6 +23,12 @@ class Enemy {
         }
         
         this.animationTick = 0
+
+        this.lives = 1
+    }
+
+    isDead() {
+        return this.lives <= 0
     }
 
     draw() {
