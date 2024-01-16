@@ -11,11 +11,11 @@ class Game {
         this.background = new Background(this.ctx)
         this.character = new Character(this.ctx, 800, 390)
         this.enemies = [
-            //new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING)
+            new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING)
         ] 
 
         this.addEnemyBackoff = 2000
-        //setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
+        setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
     }
 
     onKeyEvent(event) {

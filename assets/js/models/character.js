@@ -58,22 +58,22 @@ class Character {
                 break
             case KEY_FIRE_RIGHT:
                 if (enabled) {
-                    this.fire()
+                    this.fire({ right: true })
                 }
                 break
             case KEY_FIRE_LEFT:
                 if (enabled) {
-                    this.fire()
+                    this.fire({ left: true })
                 }
                 break
             case KEY_FIRE_UP:
                 if (enabled) {
-                    this.fire()
+                    this.fire({ up: true })
                 }
                 break
             case KEY_FIRE_DOWN:
                 if (enabled) {
-                    this.fire()
+                    this.fire({ down: true })
                 }
                 break
         }
@@ -81,7 +81,6 @@ class Character {
 
 
     move() {
-        
 
         if (this.movements.right) {
             this.x += this.vx
@@ -97,12 +96,12 @@ class Character {
 
     }
 
-    fire() {
+    fire(movement) {
         
         if (!this.movements.isShutting) {
             this.movements.isShutting = true
 
-            this.bullets.push(new Bullet(this.ctx, this.x + Math.ceil(this.w / 2), this.y + Math.ceil(this.h / 2)))
+            this.bullets.push(new Bullet(this.ctx, this.x + Math.ceil(this.w / 2), this.y + Math.ceil(this.h / 2), movement))
             
             setTimeout(() => this.movements.isShutting = false, CHARACTER_BULLET_BACK_OFF)
         }

@@ -1,6 +1,6 @@
 class Bullet {
 
-    constructor(ctx, x, y) {
+    constructor(ctx, x, y, movement) {
         this.ctx = ctx
         
         this.x = x
@@ -18,12 +18,7 @@ class Bullet {
             this.sprite.isReady = true
         }
 
-        this.bulletMovements = {
-            right: false,
-            left: false,
-            up: false,
-            down: false
-        }
+        this.bulletMovements = movement
     }
 
 
