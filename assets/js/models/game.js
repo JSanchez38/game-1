@@ -9,9 +9,13 @@ class Game {
         this.fps = FPS_GAME
 
         this.background = new Background(this.ctx)
-        this.character = new Character(this.ctx, 300, 300)
-        
+        this.character = new Character(this.ctx, 800, 390)
+        this.enemies = [
+            new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING)
+        ] 
 
+        this.addEnemyBackoff = 2000
+        setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
     }
 
     onKeyEvent(event) {
@@ -28,6 +32,16 @@ class Game {
         }
     }
 
+    addRandomEnemy() {
+        if(this.drawIntervalId) {
+            this.enemies.push(new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING))
+        }
+
+        this.addEnemyBackoff = Math.floor(Math.random() * 4 + 1) * 1000
+        setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
+
+    }
+
     stop() {
         clearInterval(this.drawIntervalId)
         this.drawIntervalId = undefined
@@ -36,14 +50,17 @@ class Game {
     draw() {
         this.background.draw()
         this.character.draw()
+        this.enemies.forEach((enemy) => enemy.draw()) 
     }
 
     move() {
         this.character.move()
+        this.enemies.forEach((enemy) => enemy.move())
     }
 
     clear() {
         this.character.clear()
+        this.enemies = this.enemies.filter((enemy) => (enemy.x - enemy.w) < this.canvas.width)
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
 }

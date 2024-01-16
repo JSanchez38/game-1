@@ -11,7 +11,7 @@ class Bullet {
         this.w = 10
         this.h = 10
 
-        this.movements = {
+        this.bulletMovements = {
             right: false,
             left: false,
             up: false,
@@ -19,34 +19,15 @@ class Bullet {
         }
     }
 
-    onKeyEvent(event) {
-        const enabled = event.type === 'keydown'
-
-        switch(event.keyCode) {
-            case KEY_FIRE_RIGHT:
-                this.movements.right = enabled
-                break
-            case KEY_FIRE_LEFT:
-                this.movements.left = enabled
-                break
-            case KEY_FIRE_UP:
-                this.movements.up = enabled
-                break
-            case KEY_FIRE_DOWN:
-                this.movements.down = enabled
-                break       
-        }
-            
-    }
 
     move() {
-        if (this.movements.right) {
+        if (this.bulletMovements.right) {
             this.x += this.vx
-        } else if (this.movements.left) {
+        } else if (this.bulletMovements.left) {
             this.x -= this.vx
-        } else if (this.movements.up) {
+        } else if (this.bulletMovements.up) {
             this.y -= this.vy
-        } else if (this.movements.down) {
+        } else if (this.bulletMovements.down) {
             this.y += this.vy
         }
     }

@@ -1,6 +1,6 @@
 // tamaño canvas
-const CANVAS_W = 1000
-const CANVAS_H = 600
+const CANVAS_W = 1200
+const CANVAS_H = 800
 
 const FPS_GAME = 1000 / 60
 
@@ -22,5 +22,9 @@ const KEY_FIRE_DOWN = 40
 // velocidad bala
 const SPEED_BULLET = 10
 
-const CHARACTER_BULLET_BACK_OFF = 300
+const CHARACTER_BULLET_BACK_OFF = 100
 const CHARACTER_RUN_ANIMATION_TICK = 10
+
+const ENEMY_RUN_ANIMATION_TICK = 3
+const ENEMY_GROUND_PADDING = 400
+const ENEMY_SPEED_MOVE = 5

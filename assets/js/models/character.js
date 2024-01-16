@@ -18,7 +18,7 @@ class Character {
         this.sprite.horizontalFrames = 3
 
         this.sprite.verticalFrameIndex = 0
-        this.sprite.horizontalFrameIndex = 0
+        this.sprite.horizontalFrameIndex = 1
 
         this.sprite.onload = () => {
             this.sprite.isReady = true
@@ -81,7 +81,7 @@ class Character {
 
 
     move() {
-        this.bullets.forEach((bullet) => bullet.move())
+        
 
         if (this.movements.right) {
             this.x += this.vx
@@ -92,9 +92,13 @@ class Character {
         } else if (this.movements.down) {
             this.y += this.vy
         }
+
+        this.bullets.forEach((bullet) => bullet.move())
+
     }
 
     fire() {
+        
         if (!this.movements.isShutting) {
             this.movements.isShutting = true
 
@@ -144,7 +148,7 @@ class Character {
             this.sprite.horizontalFrameIndex++
 
             if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
-                this.sprite.horizontalFrameIndex = 1
+                this.sprite.horizontalFrameIndex = 0
             }
         } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.right)) {
             this.animationTick = 0
@@ -152,8 +156,8 @@ class Character {
             this.sprite.horizontalFrameIndex++
 
 
-            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
-                this.sprite.horizontalFrameIndex = 1
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex - 1) {
+                this.sprite.horizontalFrameIndex = 0
             }
         } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.up)) {
             this.animationTick = 0
@@ -161,8 +165,8 @@ class Character {
             this.sprite.horizontalFrameIndex++
             
 
-            if(this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
-                this.sprite.horizontalFrameIndex = 1
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
+                this.sprite.horizontalFrameIndex = 0
             }
         } else if (!this.movements.down && !this.movements.left && !this.movements.right && !this.movements.up) {
             this.sprite.horizontalFrameIndex = 1
