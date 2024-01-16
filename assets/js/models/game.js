@@ -28,8 +28,17 @@ class Game {
                 this.clear()
                 this.move()
                 this.draw()
+                this.checkCollisions()
             }, this.fps)
         }
+    }
+
+    checkCollisions() {
+        this.enemies.forEach((enemy) => {
+            if (enemy.collidesWith(this.character)) {
+                this.gameOver()
+            }
+        })
     }
 
     addRandomEnemy() {
@@ -62,5 +71,10 @@ class Game {
         this.character.clear()
         this.enemies = this.enemies.filter((enemy) => (enemy.x - enemy.w) < this.canvas.width)
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    }
+
+    gameOver() {
+        this.stop()
+
     }
 }

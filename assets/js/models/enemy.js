@@ -59,4 +59,13 @@ class Enemy {
             }
         }
     }
+
+    collidesWith(element) {
+        return (
+            this.x + this.w > element.x &&
+            this.x < element.x + element.w &&
+            this.y + this.h > element.h &&
+            this.y < element.y + element.h
+        )
+    }
 }
