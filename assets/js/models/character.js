@@ -8,8 +8,8 @@ class Character {
         this.y = y
         this.vy = CHARACTER_MOVE_XY
 
-        this.w = Math.ceil(33 * 2)
-        this.h = Math.ceil(33 * 2)
+        this.w = 33 * 2
+        this.h = 33 * 2
 
         this.sprite = new Image()
         this.sprite.src = '/assets/img/isaac-sprites.png'
@@ -102,7 +102,7 @@ class Character {
         if (!this.movements.isShutting) {
             this.movements.isShutting = true
 
-            this.bullets.push(new Bullet(this.ctx, this.x + this.w, this.y + Math.ceil(this.h / 2)))
+            this.bullets.push(new Bullet(this.ctx, this.x + Math.ceil(this.w / 2), this.y + Math.ceil(this.h / 2)))
             
             setTimeout(() => this.movements.isShutting = false, CHARACTER_BULLET_BACK_OFF)
         }

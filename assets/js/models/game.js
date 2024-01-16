@@ -11,11 +11,11 @@ class Game {
         this.background = new Background(this.ctx)
         this.character = new Character(this.ctx, 800, 390)
         this.enemies = [
-            new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING)
+            //new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING)
         ] 
 
         this.addEnemyBackoff = 2000
-        setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
+        //setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
     }
 
     onKeyEvent(event) {
@@ -77,6 +77,16 @@ class Game {
     move() {
         this.character.move()
         this.enemies.forEach((enemy) => enemy.move())
+
+        if (this.character.x < 0) {
+            this.character.x = 0
+        } else if (this.character.x > this.canvas.width - this.character.w) {
+            this.character.x = this.canvas.width - this.character.w
+        } else if (this.character.y < 0) {
+            this.character.y = 0
+        } else if (this.character.y > this.canvas.height - this.character.h) {
+            this.character.y = this.canvas.height - this.character.h
+        }
     }
 
     clear() {

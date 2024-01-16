@@ -8,8 +8,15 @@ class Bullet {
 
         this.y = y
         this.vy = SPEED_BULLET
-        this.w = 10
-        this.h = 10
+        this.w = 12 * 1.5
+        this.h = 12 * 1.5
+
+        this.sprite = new Image()
+        this.sprite.src = '/assets/img/tear.png'
+
+        this.sprite.onload = () => {
+            this.sprite.isReady = true
+        }
 
         this.bulletMovements = {
             right: false,
@@ -33,6 +40,14 @@ class Bullet {
     }
 
     draw() {
-        this.ctx.fillRect(this.x, this.y, this.w, this.h)
+        if (this.sprite.isReady) {
+            this.ctx.drawImage(
+                this.sprite,
+                this.x,
+                this.y,
+                this.w,
+                this.h
+            )
+        }
     }
 }
