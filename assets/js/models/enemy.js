@@ -9,7 +9,7 @@ class Enemy {
         this.h = 20 * 2
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/img/enemy.png'
+        this.sprite.src = '/assets/img/sprites/enemy.png'
 
         this.sprite.verticalFrames = 1
         this.sprite.horizontalFrames = 6

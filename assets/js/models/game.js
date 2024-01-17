@@ -66,6 +66,24 @@ class Game {
     stop() {
         clearInterval(this.drawIntervalId)
         this.drawIntervalId = undefined
+
+        const gameOver = document.getElementById('end-panel')
+        gameOver.classList.remove('hidden')
+
+        const canvasPanel = document.getElementById('main-canvas')
+        canvasPanel.classList.add('hidden')
+
+        const tryAgain = document.getElementById('btn-retry')
+        tryAgain.addEventListener('click', () => {
+
+            const gameOver = document.getElementById('end-panel')
+            gameOver.classList.add('hidden')
+
+            const startPanel = document.getElementById('start-panel')
+            startPanel.classList.remove('hidden')
+
+        })
+
     }
 
     draw() {

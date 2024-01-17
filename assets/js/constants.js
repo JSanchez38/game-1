@@ -1,5 +1,5 @@
 // tamaño canvas
-const CANVAS_W = 1200
+const CANVAS_W = 1000
 const CANVAS_H = 800
 
 const FPS_GAME = 1000 / 60

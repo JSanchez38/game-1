@@ -12,7 +12,7 @@ class Bullet {
         this.h = 12 * 1.5
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/img/tear.png'
+        this.sprite.src = '/assets/img/sprites/tear.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true

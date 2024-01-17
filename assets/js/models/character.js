@@ -23,7 +23,7 @@ class Character {
         this.sprite.horizontalFrameIndex = 1
         */
 
-        this.sprite.src = '/assets/img/vs1.png'
+        this.sprite.src = '/assets/img/sprites/vs1.png'
         this.sprite.verticalFrames = 1
         this.sprite.horizontalFrames = 8
         this.sprite.verticalFrameIndex = 0
@@ -155,7 +155,8 @@ class Character {
             if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 5) {
                 this.sprite.horizontalFrameIndex = 0
             }
-        /* } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.left)) {
+        /* isaac sprite
+        } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.left)) {
             this.animationTick = 0
             this.sprite.horizontalFrameIndex++
 
