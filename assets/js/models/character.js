@@ -109,6 +109,9 @@ class Character {
 
     clear() {
         this.bullets = this.bullets.filter((bullet) => bullet.x < this.ctx.canvas.width)
+         
+
+        console.log(this.bullets)
     }
 
     draw() {

@@ -91,8 +91,9 @@ class Game {
 
     clear() {
         this.character.clear()
+        
         this.enemies = this.enemies.filter((enemy) => (enemy.x - enemy.w) < this.canvas.width && !enemy.isDead())
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+
     }
 
     gameOver() {
