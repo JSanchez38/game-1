@@ -23,8 +23,9 @@ class Enemy {
         }
         
         this.animationTick = 0
-
         this.lives = 1
+        
+
     }
 
     isDead() {
@@ -53,6 +54,7 @@ class Enemy {
         this.x += this.vx
     }
 
+
     animate() {
         this.animationTick++
 
@@ -74,4 +76,5 @@ class Enemy {
             this.y < element.y + element.h
         )
     }
+
 }

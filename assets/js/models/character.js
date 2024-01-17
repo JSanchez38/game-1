@@ -120,7 +120,7 @@ class Character {
         this.bullets = this.bullets.filter((bullet) => bullet.x < this.ctx.canvas.width)
          
 
-        console.log(this.bullets)
+        //console.log(this.bullets)
     }
 
     draw() {

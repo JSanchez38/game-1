@@ -16,6 +16,7 @@ class Game {
 
         this.addEnemyBackoff = 2000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
+
     }
 
     onKeyEvent(event) {
@@ -55,13 +56,15 @@ class Game {
 
     addRandomEnemy() {
         if(this.drawIntervalId) {
-            this.enemies.push(new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING))
+            this.enemies.push(new Enemy(this.ctx, Math.random() * -this.canvas.width, Math.random() * +this.canvas.height))
+            
         }
 
         this.addEnemyBackoff = Math.floor(Math.random() * 4 + 1) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
     }
+
 
     stop() {
         clearInterval(this.drawIntervalId)
