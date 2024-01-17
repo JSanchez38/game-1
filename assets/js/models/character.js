@@ -8,10 +8,12 @@ class Character {
         this.y = y
         this.vy = CHARACTER_MOVE_XY
 
-        this.w = 33 * 2
-        this.h = 33 * 2
+        this.w = 24 * 2
+        this.h = 34 * 2
 
         this.sprite = new Image()
+
+        /* isaac sprite
         this.sprite.src = '/assets/img/isaac-sprites.png'
 
         this.sprite.verticalFrames = 4
@@ -19,6 +21,13 @@ class Character {
 
         this.sprite.verticalFrameIndex = 0
         this.sprite.horizontalFrameIndex = 1
+        */
+
+        this.sprite.src = '/assets/img/vs1.png'
+        this.sprite.verticalFrames = 1
+        this.sprite.horizontalFrames = 8
+        this.sprite.verticalFrameIndex = 0
+        this.sprite.horizontalFrameIndex = 0
 
         this.sprite.onload = () => {
             this.sprite.isReady = true
@@ -126,7 +135,8 @@ class Character {
                 this.x,
                 this.y,
                 this.w,
-                this.h)
+                this.h
+                )
         }
 
         this.bullets.forEach((bullet) => bullet.draw())
@@ -137,16 +147,16 @@ class Character {
     animate() {
         this.animationTick++
 
-        if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.down)) {
+
+        if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.down || this.movements.right || this.movements.up)) {
             this.animationTick = 0
             this.sprite.horizontalFrameIndex++
             
-            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
-                this.sprite.horizontalFrameIndex = 1
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 5) {
+                this.sprite.horizontalFrameIndex = 0
             }
-        } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.left)) {
+        /* } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.left)) {
             this.animationTick = 0
-            this.sprite.verticalFrameIndex = 1
             this.sprite.horizontalFrameIndex++
 
             if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
@@ -154,7 +164,6 @@ class Character {
             }
         } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.right)) {
             this.animationTick = 0
-            this.sprite.verticalFrameIndex = 2
             this.sprite.horizontalFrameIndex++
 
 
@@ -163,16 +172,24 @@ class Character {
             }
         } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.up)) {
             this.animationTick = 0
-            this.sprite.verticalFrameIndex = 3
             this.sprite.horizontalFrameIndex++
             
 
             if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrameIndex -1) {
                 this.sprite.horizontalFrameIndex = 0
-            }
+            }*/
+        } else if (this.animationTick >= CHARACTER_RUN_ANIMATION_TICK && (this.movements.left)) {
+            this.animationTick = 0
+            this.sprite.horizontalFrameIndex++ 
+
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
+                this.sprite.horizontalFrameIndex = 4
+
+            }    
         } else if (!this.movements.down && !this.movements.left && !this.movements.right && !this.movements.up) {
-            this.sprite.horizontalFrameIndex = 1
-            this.sprite.verticalFrameIndex = 0
+            this.sprite.horizontalFrameIndex = 0
         }
     }
+
+
 }
