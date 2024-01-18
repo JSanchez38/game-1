@@ -9,10 +9,10 @@ class Enemy {
         this.h = 20 * 2
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/img/sprites/enemy.png'
+        this.sprite.src = '/assets/img/sprites/enemy-1-sprite.png'
 
         this.sprite.verticalFrames = 1
-        this.sprite.horizontalFrames = 6
+        this.sprite.horizontalFrames = 3
         this.sprite.verticalFrameIndex = 0
         this.sprite.horizontalFrameIndex = 0
 
@@ -23,7 +23,7 @@ class Enemy {
         }
         
         this.animationTick = 0
-        this.lives = 1
+        this.lives = 2
         
 
     }
@@ -54,8 +54,8 @@ class Enemy {
         const diffX = positionX - this.x
         const diffY = positionY - this.y
 
-        this.x += diffX * 0.01
-        this.y += diffY * 0.01
+        this.x += diffX * 0.015
+        this.y += diffY * 0.015
     }
 
 
@@ -66,7 +66,7 @@ class Enemy {
             this.animationTick = 0
             this.sprite.horizontalFrameIndex++
 
-            if(this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
+            if (this.sprite.horizontalFrameIndex > this.sprite.horizontalFrames - 1) {
                 this.sprite.horizontalFrameIndex = 0
             }
         }
@@ -74,10 +74,10 @@ class Enemy {
 
     collidesWith(element) {
         return (
-            this.x + this.w > element.x &&
             this.x < element.x + element.w &&
-            this.y + this.h > element.h &&
-            this.y < element.y + element.h
+            this.x + this.w > element.x &&
+            this.y < element.y + element.h &&
+            this.h + this.y > element.y
         )
     }
 

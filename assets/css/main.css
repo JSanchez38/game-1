@@ -29,9 +29,18 @@ canvas {
 #btn-start-game {
     background-image: url('/assets//img/buttons/button_blue.png');
     background-size: cover;
+    max-width: 100px;
+    max-height: 33px;
+    width: 100%;
+    height: 100%;
+    
 }
 
 #btn-retry {
     background-image: url('/assets//img/buttons/button_red.png');
     background-size: cover;
+    max-width: 100px;
+    max-height: 33px;
+    width: 100%;
+    height: 100%;
 }
