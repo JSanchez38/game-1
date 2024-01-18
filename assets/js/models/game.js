@@ -54,9 +54,59 @@ class Game {
         })
     }
 
+    getRandomNumber(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      
+    initialPositionX() {
+        const randomSide = Math.floor(Math.random() * 4)
+        let x
+        
+        switch (randomSide) {
+            case 0:
+                x = this.getRandomNumber(0, this.canvas.width)
+                break
+            case 1:
+                x = this.canvas.width + 50
+                break
+            case 2:
+                x = this.getRandomNumber(0, this.canvas.width)
+                break
+            case 3:
+                x = -50
+                break    
+        }
+        return x
+    }
+
+    initialPositionY() {
+        const randomSide = Math.floor(Math.random() * 4)
+        let y
+
+        switch (randomSide) {
+            case 0:
+                y = this.getRandomNumber(0, this.canvas.height)
+                break
+            case 1:
+                y = this.canvas.width + 50
+                break
+            case 2:
+                y = this.getRandomNumber(0, this.canvas.height)
+                break
+            case 3:
+                y = -50
+                break    
+        }
+        return y
+    }
+
     addRandomEnemy() {
+
+        const enemyX = this.initialPositionX()
+        const enemyY = this.initialPositionY()
+
         if(this.drawIntervalId) {
-            this.enemies.push(new Enemy(this.ctx, Math.random() * - this.canvas.width, Math.random() * + this.canvas.height))
+            this.enemies.push(new Enemy(this.ctx, enemyX, enemyY))
             
         }
 
