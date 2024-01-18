@@ -9,11 +9,9 @@ class Game {
         this.fps = FPS_GAME
 
         this.background = new Background(this.ctx)
-        this.character = new Character(this.ctx, 800, 390)
-        this.enemies = [
-            new Enemy(this.ctx, this.canvas.width - 1300, this.canvas.height - ENEMY_GROUND_PADDING)
-        ] 
-
+        this.character = new Character(this.ctx, 500, 390)
+        this.enemies = [new Enemy(this.ctx, this.enemyX, this.enemyY)]
+        
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
@@ -105,12 +103,12 @@ class Game {
         const enemyX = this.initialPositionX()
         const enemyY = this.initialPositionY()
 
-        if(this.drawIntervalId) {
+        if (this.drawIntervalId) {
             this.enemies.push(new Enemy(this.ctx, enemyX, enemyY))
             
         }
 
-        this.addEnemyBackoff = Math.floor(Math.random() * 0.5 + 1) * 1000
+        this.addEnemyBackoff = Math.floor(Math.random() * 0.1 + 1) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
     }
