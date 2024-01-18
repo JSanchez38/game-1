@@ -50,8 +50,12 @@ class Enemy {
         this.animate()
     }
 
-    move() {
-        this.x += this.vx
+    move(positionX, positionY) {
+        const diffX = positionX - this.x
+        const diffY = positionY - this.y
+
+        this.x += diffX * 0.01
+        this.y += diffY * 0.01
     }
 
 
