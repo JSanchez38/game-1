@@ -117,10 +117,15 @@ class Character {
     }
 
     clear() {
-        this.bullets = this.bullets.filter((bullet) => bullet.x < this.ctx.canvas.width)
-         
+        this.bullets = this.bullets.filter((bullet) => {
+            return (
+                bullet.x > 0 &&
+                bullet.x < this.ctx.canvas.width &&
+                bullet.y > 0 &&
+                bullet.y < this.ctx.canvas.height
+            ) 
+        })
 
-        //console.log(this.bullets)
     }
 
     draw() {

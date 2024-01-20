@@ -23,7 +23,7 @@ class Enemy {
         }
         
         this.animationTick = 0
-        this.lives = 2
+        this.lives = 1
         
 
     }

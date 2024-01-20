@@ -148,9 +148,10 @@ class Game {
     }
 
     clear() {
+        
         this.character.clear()
         
-        this.enemies = this.enemies.filter((enemy) => (enemy.x - enemy.w) < this.canvas.width && !enemy.isDead())
+        this.enemies = this.enemies.filter((enemy) => !enemy.isDead())
 
     }
 
