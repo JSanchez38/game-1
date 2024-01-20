@@ -27,12 +27,12 @@ class Game {
     start() {
         if (!this.drawIntervalId) {
             this.drawIntervalId = setInterval(() => {
-                this.timer.start()
                 this.clear()
                 this.move()
                 this.draw()
                 this.checkCollisions()
             }, this.fps)
+            this.timer.start()
         }
     }
 
@@ -127,8 +127,8 @@ class Game {
         const gameOver = document.getElementById('end-panel')
         gameOver.classList.remove('hidden')
 
-        const canvasPanel = document.getElementById('main-canvas')
-        canvasPanel.classList.add('hidden')
+        const gamePanel = document.getElementById('game-panel')
+        gamePanel.classList.add('hidden')
 
     }
 

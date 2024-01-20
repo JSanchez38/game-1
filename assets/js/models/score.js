@@ -31,6 +31,7 @@ class Score {
             )
             
             this.ctx.save()
+            this.ctx.fillStyle = 'white'
             this.ctx.font = '30px Arial'
             this.ctx.fillText(this.points, this.x + this.w + 15, this.y + 32)
             this.ctx.restore()

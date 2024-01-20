@@ -16,12 +16,19 @@ window.addEventListener('load', () => {
         const startPanel = document.getElementById('start-panel')
         startPanel.classList.add('hidden')
 
-        const canvasPanel = document.getElementById('main-canvas')
-        canvasPanel.classList.remove('hidden')
+        const gamePanel = document.getElementById('game-panel')
+        gamePanel.classList.remove('hidden')
 
         game.start()
 
         })
+
+        //4º 1.03.00
+        
+        const play = document.getElementById('play')
+        play.addEventListener('click', () => game.start())
+        const pause = document.getElementById('pause')
+        pause.addEventListener('click', () => game.stop())
 
         const tryAgain = document.getElementById('btn-retry')
         tryAgain.addEventListener('click', () => {
