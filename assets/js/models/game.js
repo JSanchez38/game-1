@@ -12,6 +12,7 @@ class Game {
         this.character = new Character(this.ctx, 500, 390)
         this.enemies = []
         this.score = new Score(this.ctx, 15, 30)
+        this.timer = new Timer(this.ctx, Math.ceil(this.canvas.width / 2) - 50, 30)
         
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
@@ -26,6 +27,7 @@ class Game {
     start() {
         if (!this.drawIntervalId) {
             this.drawIntervalId = setInterval(() => {
+                this.timer.start()
                 this.clear()
                 this.move()
                 this.draw()
@@ -50,7 +52,6 @@ class Game {
                     this.score.increment()
                     return false
                 }
-                console.log(this.score)
             }
             return true
         })
@@ -133,9 +134,11 @@ class Game {
 
     draw() {
         this.background.draw()
+        this.timer.draw()
         this.character.draw()
         this.enemies.forEach((enemy) => enemy.draw())
         this.score.draw()
+
     }
 
     move() {
