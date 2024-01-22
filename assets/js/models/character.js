@@ -44,7 +44,7 @@ class Character {
         }
 
         this.bullets = []
-
+        this.life = 5
         this.animationTick = 0
 
     }

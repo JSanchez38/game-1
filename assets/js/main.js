@@ -21,14 +21,15 @@ window.addEventListener('load', () => {
 
         game.start()
 
-        })
+        /* no funciona
+        const play = document.getElementById('btn-play')
+        const pause = document.getElementById('btn-pause')
 
-        //4º 1.03.00
-        
-        const play = document.getElementById('play')
         play.addEventListener('click', () => game.start())
-        const pause = document.getElementById('pause')
         pause.addEventListener('click', () => game.stop())
+        */
+
+        })
 
         const tryAgain = document.getElementById('btn-retry')
         tryAgain.addEventListener('click', () => {
@@ -39,6 +40,6 @@ window.addEventListener('load', () => {
             const startPanel = document.getElementById('start-panel')
             startPanel.classList.remove('hidden')
 
-        })
+        })       
 
 })

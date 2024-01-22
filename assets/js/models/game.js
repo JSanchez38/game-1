@@ -39,9 +39,13 @@ class Game {
     checkCollisions() {
         this.enemies.forEach((enemy) => {
             if (enemy.collidesWith(this.character)) {
-                this.gameOver()
+                this.character.life--
+                if (this.character.life <= 0) {
+                    this.gameOver()
+                }
             }
         })
+            console.log(this.character.life)
 
         this.character.bullets = this.character.bullets.filter((bullet) => {
             for (let i = 0; i < this.enemies.length; i++) {
@@ -114,23 +118,17 @@ class Game {
             
         }
 
-        this.addEnemyBackoff = Math.floor(Math.random() * 0.1 + 1) * 1000
+        this.addEnemyBackoff = Math.floor(Math.random() * 2) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
     }
 
 
     stop() {
-        clearInterval(this.drawIntervalId)
-        this.drawIntervalId = undefined
+            clearInterval(this.drawIntervalId)
+            this.drawIntervalId = undefined
 
-        const gameOver = document.getElementById('end-panel')
-        gameOver.classList.remove('hidden')
-
-        const gamePanel = document.getElementById('game-panel')
-        gamePanel.classList.add('hidden')
-
-    }
+}
 
     draw() {
         this.background.draw()
@@ -165,7 +163,13 @@ class Game {
     }
 
     gameOver() {
-        this.stop()
+            this.stop()
+
+        const gameOver = document.getElementById('end-panel')
+        gameOver.classList.remove('hidden')
+
+        const gamePanel = document.getElementById('game-panel')
+        gamePanel.classList.add('hidden')
 
     }
 }
