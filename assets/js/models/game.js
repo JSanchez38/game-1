@@ -13,7 +13,9 @@ class Game {
         this.enemies = []
         this.score = new Score(this.ctx, 15, 30)
         this.timer = new Timer(this.ctx, Math.ceil(this.canvas.width / 2) - 50, 30)
+
         
+
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
@@ -45,7 +47,6 @@ class Game {
                 }
             }
         })
-            console.log(this.character.life)
 
         this.character.bullets = this.character.bullets.filter((bullet) => {
             for (let i = 0; i < this.enemies.length; i++) {
@@ -54,6 +55,7 @@ class Game {
                 if (enemy.collidesWith(bullet)) {
                     enemy.lives--
                     this.score.increment()
+                    enemy.drop()
                     return false
                 }
             }
@@ -61,6 +63,7 @@ class Game {
         })
         
     }
+
 
     getRandomNumber(min, max) {
         return Math.random() * (max - min) + min;
@@ -137,6 +140,7 @@ class Game {
         this.enemies.forEach((enemy) => enemy.draw())
         this.score.draw()
 
+
     }
 
     move() {
@@ -157,7 +161,6 @@ class Game {
     clear() {
 
         this.character.clear()
-        
         this.enemies = this.enemies.filter((enemy) => !enemy.isDead())
 
     }

@@ -23,13 +23,22 @@ class Enemy {
         }
         
         this.animationTick = 0
-        this.lives = 2
+        this.lives = 1
+        this.drops = []
+
         
 
     }
 
     isDead() {
         return this.lives <= 0
+
+    }
+
+    drop() {
+        if (this.isDead()) {
+            this.drops.push(new Drop(this.ctx, this.x, this.y))
+        }
     }
 
     draw() {
@@ -48,6 +57,7 @@ class Enemy {
             )
         }
         this.animate()
+        this.drops.forEach((drop) => drop.draw())
     }
 
     move(positionX, positionY) {
