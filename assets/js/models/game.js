@@ -13,6 +13,7 @@ class Game {
         this.enemies = []
         this.score = new Score(this.ctx, 15, 30)
         this.timer = new Timer(this.ctx, Math.ceil(this.canvas.width / 2) - 50, 30)
+        this.bosses = []
 
         
 
@@ -48,6 +49,15 @@ class Game {
             }
         })
 
+        this.bosses.forEach((boss) => {
+            if (boss.collidesWith(this.character)) {
+                this.character.life--
+                if (this.character.life <= 0) {
+                    this.gameOver()
+                }
+            }
+        })
+
         this.character.bullets = this.character.bullets.filter((bullet) => {
             for (let i = 0; i < this.enemies.length; i++) {
                 const enemy = this.enemies[i]
@@ -56,6 +66,15 @@ class Game {
                     enemy.lives--
                     this.score.increment()
                     enemy.drop()
+                    return false
+                }
+            }
+            for (let i = 0; i < this.bosses.length; i++) {
+                const boss = this.bosses[i]
+
+                if (boss.collidesWith(bullet)) {
+                    boss.lives--
+                    this.score.bossInc()
                     return false
                 }
             }
@@ -112,19 +131,27 @@ class Game {
     }
 
     addRandomEnemy() {
-
         const enemyX = this.initialPositionX()
         const enemyY = this.initialPositionY()
 
+        const bossX = this.initialPositionX()
+        const bossY = this.initialPositionY()
+ 
+
         if (this.drawIntervalId) {
             this.enemies.push(new Enemy(this.ctx, enemyX, enemyY))
-            
+
+        }
+        
+        this.addEnemyBackoff = Math.floor(Math.random() * 3) * 1000
+        setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
+        
+        if (this.drawIntervalId && this.timer.seconds > 10) {
+            this.bosses.push(new Boss(this.ctx, bossX, bossY))
         }
 
-        this.addEnemyBackoff = Math.floor(Math.random() * 2) * 1000
-        setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
-
     }
+
 
 
     stop() {
@@ -139,6 +166,7 @@ class Game {
         this.character.draw()
         this.enemies.forEach((enemy) => enemy.draw())
         this.score.draw()
+        this.bosses.forEach((boss) => boss.draw())
 
 
     }
@@ -146,6 +174,7 @@ class Game {
     move() {
         this.character.move()
         this.enemies.forEach((enemy) => enemy.move(this.character.x, this.character.y))
+        this.bosses.forEach((boss) => boss.move(this.character.x, this.character.y))
 
         if (this.character.x < 0) {
             this.character.x = 0
@@ -162,6 +191,7 @@ class Game {
 
         this.character.clear()
         this.enemies = this.enemies.filter((enemy) => !enemy.isDead())
+        this.bosses = this.bosses.filter((boss) => !boss.isDead())
 
     }
 

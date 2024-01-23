@@ -14,10 +14,15 @@ class Score {
         }
 
         this.points = 0
+        this.bossPoints = 0
     }
 
     increment() {
         this.points++
+    }
+
+    bossInc() {
+        this.bossPoints++
     }
 
     draw() {
