@@ -4,8 +4,8 @@ class Boss {
         
         this.x = x
         this.y = y
-        this.w = 48
-        this.h = 42
+        this.w = 48 * 1.5
+        this.h = 42 * 1.5
 
         this.sprite = new Image()
         this.sprite.src = '/assets/img/sprites/boss.png'
@@ -22,7 +22,7 @@ class Boss {
         }
 
         this.animationTick = 0
-        this.lives = 5
+        this.lives = 4
 
     }
 

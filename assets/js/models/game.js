@@ -14,8 +14,8 @@ class Game {
         this.score = new Score(this.ctx, 15, 30)
         this.timer = new Timer(this.ctx, Math.ceil(this.canvas.width / 2) - 50, 30)
         this.bosses = []
+        this.life = new Life(this.ctx, 200, 40)
 
-        
 
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
@@ -42,7 +42,11 @@ class Game {
     checkCollisions() {
         this.enemies.forEach((enemy) => {
             if (enemy.collidesWith(this.character)) {
-                this.character.life--
+
+                if (this.character.hit()) {
+                    this.life.decrement()
+                }
+                
                 if (this.character.life <= 0) {
                     this.gameOver()
                 }
@@ -51,7 +55,11 @@ class Game {
 
         this.bosses.forEach((boss) => {
             if (boss.collidesWith(this.character)) {
-                this.character.life--
+                
+                if (this.character.hit()) {
+                    this.life.decrement()
+                }
+
                 if (this.character.life <= 0) {
                     this.gameOver()
                 }
@@ -142,11 +150,11 @@ class Game {
             this.enemies.push(new Enemy(this.ctx, enemyX, enemyY))
 
         }
-        
+
         this.addEnemyBackoff = Math.floor(Math.random() * 3) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
         
-        if (this.drawIntervalId && this.timer.seconds > 10) {
+        if (this.drawIntervalId && this.timer.seconds > 5) {
             this.bosses.push(new Boss(this.ctx, bossX, bossY))
         }
 
@@ -167,7 +175,7 @@ class Game {
         this.enemies.forEach((enemy) => enemy.draw())
         this.score.draw()
         this.bosses.forEach((boss) => boss.draw())
-
+        this.life.draw()
 
     }
 
@@ -205,4 +213,5 @@ class Game {
         gamePanel.classList.add('hidden')
 
     }
+
 }

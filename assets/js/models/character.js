@@ -13,16 +13,6 @@ class Character {
 
         this.sprite = new Image()
 
-        /* isaac sprite
-        this.sprite.src = '/assets/img/isaac-sprites.png'
-
-        this.sprite.verticalFrames = 4
-        this.sprite.horizontalFrames = 3
-
-        this.sprite.verticalFrameIndex = 0
-        this.sprite.horizontalFrameIndex = 1
-        */
-
         this.sprite.src = '/assets/img/sprites/vs1.png'
         this.sprite.verticalFrames = 1
         this.sprite.horizontalFrames = 8
@@ -44,9 +34,27 @@ class Character {
         }
 
         this.bullets = []
-        this.life = 5
+        this.life = 3
         this.animationTick = 0
 
+        this.hitted = false
+
+    }
+
+    hit() {
+        if (this.hitted) {
+            return false
+        }
+
+        this.hitted = true
+
+        this.life -= 1
+
+        window.setTimeout(() => {
+            this.hitted = false
+        }, 2_000)
+
+        return true
     }
 
     onKeyEvent(event) {
@@ -145,7 +153,6 @@ class Character {
         }
 
         this.bullets.forEach((bullet) => bullet.draw())
-
         this.animate()
     }
 
