@@ -8,12 +8,12 @@ class Character {
         this.y = y
         this.vy = CHARACTER_MOVE_XY
 
-        this.w = 24 * 2
-        this.h = 34 * 2
+        this.w = 24 * 1.5
+        this.h = 34 * 1.5
 
         this.sprite = new Image()
 
-        this.sprite.src = '/assets/img/sprites/vs1.png'
+        this.sprite.src = '/assets/img/sprites/character-sprite.png'
         this.sprite.verticalFrames = 1
         this.sprite.horizontalFrames = 8
         this.sprite.verticalFrameIndex = 0

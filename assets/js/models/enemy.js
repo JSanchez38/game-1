@@ -5,11 +5,11 @@ class Enemy {
         this.x = x
         this.vx = ENEMY_SPEED_MOVE
         this.y = y
-        this.w = 30 * 2
-        this.h = 20 * 2
+        this.w = 30 * 1.5
+        this.h = 20 * 1.5
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/img/sprites/enemy-1-sprite.png'
+        this.sprite.src = Math.random() > 0.5 ? '/assets/img/sprites/enemy-1-sprite.png' : '/assets/img/sprites/enemy-2-sprite.png'
 
         this.sprite.verticalFrames = 1
         this.sprite.horizontalFrames = 3
@@ -24,7 +24,7 @@ class Enemy {
         
         this.animationTick = 0
         this.lives = 1
-        this.drops = []
+
 
         
 
@@ -35,11 +35,6 @@ class Enemy {
 
     }
 
-    drop() {
-        if (this.isDead()) {
-            this.drops.push(new Drop(this.ctx, this.x, this.y))
-        }
-    }
 
     draw() {
 
@@ -57,7 +52,7 @@ class Enemy {
             )
         }
         this.animate()
-        this.drops.forEach((drop) => drop.draw())
+
     }
 
     move(positionX, positionY) {

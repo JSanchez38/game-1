@@ -8,11 +8,11 @@ class Bullet {
 
         this.y = y
         this.vy = SPEED_BULLET
-        this.w = 12 * 1.5
-        this.h = 12 * 1.5
+        this.w = 8 * 1.5
+        this.h = 8 * 1.5
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/img/sprites/tear.png'
+        this.sprite.src = '/assets/img/sprites/bullet.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true

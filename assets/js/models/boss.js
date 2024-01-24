@@ -22,7 +22,7 @@ class Boss {
         }
 
         this.animationTick = 0
-        this.lives = 4
+        this.lives = 3
 
     }
 

@@ -73,7 +73,7 @@ class Game {
                 if (enemy.collidesWith(bullet)) {
                     enemy.lives--
                     this.score.increment()
-                    enemy.drop()
+
                     return false
                 }
             }
@@ -88,7 +88,6 @@ class Game {
             }
             return true
         })
-        
     }
 
 
@@ -154,13 +153,12 @@ class Game {
         this.addEnemyBackoff = Math.floor(Math.random() * 3) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
         
-        if (this.drawIntervalId && this.timer.seconds > 5) {
+
+        if (this.drawIntervalId && this.timer.minutes === 1) {
             this.bosses.push(new Boss(this.ctx, bossX, bossY))
         }
 
     }
-
-
 
     stop() {
             clearInterval(this.drawIntervalId)
@@ -213,5 +211,6 @@ class Game {
         gamePanel.classList.add('hidden')
 
     }
+
 
 }
