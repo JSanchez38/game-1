@@ -21,9 +21,7 @@ class Game {
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
-        //spawn drop
-        setInterval(() => this.spawnDrop(), 1500 * 10)
-
+        setInterval(() => this.spawnDrop(), 15000)
 
 
     }
@@ -187,6 +185,9 @@ class Game {
     stop() {
             clearInterval(this.drawIntervalId)
             this.drawIntervalId = undefined
+
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            backgroundMusic.pause();
 
 }
 

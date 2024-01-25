@@ -27,6 +27,11 @@ window.addEventListener('load', () => {
         play.addEventListener('click', () => game.start())
         pause.addEventListener('click', () => game.stop())
 
+        
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        backgroundMusic.play();
+        backgroundMusic.volume = 0.2
+
 
         })
 
@@ -40,5 +45,4 @@ window.addEventListener('load', () => {
             startPanel.classList.remove('hidden')
 
         })       
-
 })

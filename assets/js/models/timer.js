@@ -7,13 +7,15 @@ class Timer {
         this.w = Math.ceil(650 / 15)
         this.h = Math.ceil(650 / 15) 
 
+        this.timerIntervalId = undefined
 
         this.seconds = 0
         this.minutes = 0
     }
 
     start() {
-        setInterval(() => {
+        if (!this.timerIntervalId) {
+            this.timerIntervalId = setInterval(() => {
             this.seconds++
             
             if (this.seconds === 60) {
@@ -27,6 +29,7 @@ class Timer {
         }, 1000) 
 
     }
+}
     draw() {
 
         this.ctx.save()
