@@ -52,7 +52,7 @@ class Character {
 
         window.setTimeout(() => {
             this.hitted = false
-        }, 2_000)
+        }, 1_000)
 
         return true
     }

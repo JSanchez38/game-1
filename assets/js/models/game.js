@@ -15,10 +15,12 @@ class Game {
         this.timer = new Timer(this.ctx, Math.ceil(this.canvas.width / 2) - 50, 30)
         this.bosses = []
         this.life = new Life(this.ctx, 200, 40)
+        this.drops = []
 
 
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
+
 
 
     }
@@ -45,11 +47,19 @@ class Game {
 
                 if (this.character.hit()) {
                     this.life.decrement()
+                    
                 }
                 
                 if (this.character.life <= 0) {
                     this.gameOver()
                 }
+            }
+        })
+
+        this.drops.forEach((drop) => {
+            if (drop.collidesWith(this.character)) {
+                this.life.increment()
+                
             }
         })
 
@@ -152,11 +162,25 @@ class Game {
 
         this.addEnemyBackoff = Math.floor(Math.random() * 3) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
-        
+         
+        if (this.drawIntervalId && this.score.points === 2) {
+            this.spawnDrop()
+        }
 
         if (this.drawIntervalId && this.timer.minutes === 1) {
             this.bosses.push(new Boss(this.ctx, bossX, bossY))
+            
         }
+    }
+
+
+
+    spawnDrop() {
+        
+        const randomX = Math.floor(Math.random() * this.canvas.width);
+        const randomY = Math.floor(Math.random() * this.canvas.height);
+        
+        return this.drops.push(new Drop(this.ctx, randomX, randomY))
 
     }
 
@@ -174,6 +198,8 @@ class Game {
         this.score.draw()
         this.bosses.forEach((boss) => boss.draw())
         this.life.draw()
+
+        this.drops.forEach((drop) => drop.draw())
 
     }
 
@@ -198,7 +224,7 @@ class Game {
         this.character.clear()
         this.enemies = this.enemies.filter((enemy) => !enemy.isDead())
         this.bosses = this.bosses.filter((boss) => !boss.isDead())
-
+        
     }
 
     gameOver() {
