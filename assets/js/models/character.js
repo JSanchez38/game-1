@@ -38,6 +38,7 @@ class Character {
         this.animationTick = 0
 
         this.hitted = false
+        this.heal = false
 
     }
 
@@ -55,6 +56,16 @@ class Character {
         }, 1_000)
 
         return true
+    }
+
+    healing() {
+        if (this.heal) {
+            return false
+        }
+        this.heal = true
+        
+        this.life += 1
+
     }
 
     onKeyEvent(event) {

@@ -21,6 +21,9 @@ class Game {
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
+        //spawn drop
+        setInterval(() => this.spawnDrop(), 1500 * 10)
+
 
 
     }
@@ -59,7 +62,7 @@ class Game {
         this.drops.forEach((drop) => {
             if (drop.collidesWith(this.character)) {
                 this.life.increment()
-                
+                this.character.healing()
             }
         })
 
@@ -162,10 +165,7 @@ class Game {
 
         this.addEnemyBackoff = Math.floor(Math.random() * 3) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
-         
-        if (this.drawIntervalId && this.score.points === 2) {
-            this.spawnDrop()
-        }
+
 
         if (this.drawIntervalId && this.timer.minutes === 1) {
             this.bosses.push(new Boss(this.ctx, bossX, bossY))
@@ -177,8 +177,8 @@ class Game {
 
     spawnDrop() {
         
-        const randomX = Math.floor(Math.random() * this.canvas.width);
-        const randomY = Math.floor(Math.random() * this.canvas.height);
+        const randomX = Math.floor(Math.random() * (this.canvas.width + 50));
+        const randomY = Math.floor(Math.random() * (this.canvas.height + 50));
         
         return this.drops.push(new Drop(this.ctx, randomX, randomY))
 
@@ -224,7 +224,7 @@ class Game {
         this.character.clear()
         this.enemies = this.enemies.filter((enemy) => !enemy.isDead())
         this.bosses = this.bosses.filter((boss) => !boss.isDead())
-        
+        this.drops = this.drops.filter((drop) => !drop.collidesWith(this.character))
     }
 
     gameOver() {

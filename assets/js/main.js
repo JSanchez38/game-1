@@ -20,14 +20,13 @@ window.addEventListener('load', () => {
         gamePanel.classList.remove('hidden')
 
         game.start()
-
-        /* no funciona
+ 
         const play = document.getElementById('btn-play')
         const pause = document.getElementById('btn-pause')
 
         play.addEventListener('click', () => game.start())
         pause.addEventListener('click', () => game.stop())
-        */
+
 
         })
 

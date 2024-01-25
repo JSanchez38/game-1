@@ -26,10 +26,16 @@ class Life {
 
     decrement() {
         this.sprite.verticalFrameIndex += 1
+
     }
     
     increment() {
         this.sprite.verticalFrameIndex -= 1
+
+        if (this.sprite.verticalFrameIndex < this.sprite.verticalFrames - 1) {
+            this.sprite.verticalFrameIndex = 0
+        }
+
     }
 
     draw() {
