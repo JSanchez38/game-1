@@ -19,6 +19,7 @@ class Game {
         this.drops = []
         this.finalBosses = []
 
+        this.leaderboad = []
 
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
@@ -294,17 +295,20 @@ class Game {
     gameOver() {
             this.stop()
 
+            this.leaderboad.push(`${this.timer.minutes} : ${this.timer.seconds}`)
+            console.log(this.leaderboad)
+
             const gameOverSound = document.getElementById('gameOverSound')
             gameOverSound.play()
             gameOverSound.volume = 0.05
 
-        const gameOver = document.getElementById('end-panel')
-        gameOver.classList.remove('hidden')
+            const gameOver = document.getElementById('end-panel')
+            gameOver.classList.remove('hidden')
 
-        const gamePanel = document.getElementById('game-panel')
-        gamePanel.classList.add('hidden')
+            const gamePanel = document.getElementById('game-panel')
+            gamePanel.classList.add('hidden')
+
+
 
     }
-
-
 }
