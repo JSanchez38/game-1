@@ -17,12 +17,13 @@ class Game {
         this.bosses = []
         this.life = new Life(this.ctx, 200, 40)
         this.drops = []
+        this.finalBosses = []
 
 
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
-        setInterval(() => this.spawnDrop(), 3000)
+        setInterval(() => this.spawnDrop(), 15000)
 
     }
 
@@ -99,6 +100,24 @@ class Game {
             }
         })
 
+        this.finalBosses.forEach((finalBoss) => {
+            if (finalBoss.collidesWith(this.character)) {
+                
+                if (this.character.hit()) {
+                    this.life.decrement()
+
+                    const hittedSound = document.getElementById('hittedSound')
+                    hittedSound.play()
+                    hittedSound.volume = 0.2
+
+                }
+
+                if (this.character.life <= 0) {
+                    this.gameOver()
+                }
+            }
+        })
+
         this.character.bullets = this.character.bullets.filter((bullet) => {
             for (let i = 0; i < this.enemies.length; i++) {
                 const enemy = this.enemies[i]
@@ -120,6 +139,18 @@ class Game {
                     return false
                 }
             }
+
+            for (let i = 0; i < this.finalBosses.length; i++) {
+                const finalBoss = this.finalBosses[i]
+
+                if (finalBoss.collidesWith(bullet)) {
+                    finalBoss.lives--
+                    this.score.bossInc()
+
+                    return false
+                }
+            }
+
             return true
         })
     }
@@ -177,6 +208,9 @@ class Game {
 
         const bossX = this.initialPositionX()
         const bossY = this.initialPositionY()
+
+        const boss2X = this.initialPositionY()
+        const boss2Y = this.initialPositionY()
  
 
         if (this.drawIntervalId) {
@@ -191,6 +225,10 @@ class Game {
         if (this.drawIntervalId && this.timer.minutes === 1) {
             this.bosses.push(new Boss(this.ctx, bossX, bossY))
             
+        }
+
+        if (this.drawIntervalId && this.timer.minutes === 2) {
+            this.finalBosses.push(new FinalBoss(this.ctx, boss2X, boss2Y))
         }
     }
 
@@ -223,6 +261,7 @@ class Game {
         this.life.draw()
 
         this.drops.forEach((drop) => drop.draw())
+        this.finalBosses.forEach((finalBoss) => finalBoss.draw())
 
     }
 
@@ -230,6 +269,7 @@ class Game {
         this.character.move()
         this.enemies.forEach((enemy) => enemy.move(this.character.x, this.character.y))
         this.bosses.forEach((boss) => boss.move(this.character.x, this.character.y))
+        this.finalBosses.forEach((finalBoss) => finalBoss.move(this.character.x, this.character.y))
 
         if (this.character.x < 0) {
             this.character.x = 0
@@ -248,6 +288,7 @@ class Game {
         this.enemies = this.enemies.filter((enemy) => !enemy.isDead())
         this.bosses = this.bosses.filter((boss) => !boss.isDead())
         this.drops = this.drops.filter((drop) => !drop.collidesWith(this.character))
+        this.finalBosses = this.finalBosses.filter((finalBoss) => !finalBoss.isDead())
     }
 
     gameOver() {
