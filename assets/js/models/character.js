@@ -62,9 +62,18 @@ class Character {
         if (this.heal) {
             return false
         }
+
         this.heal = true
-        
-        this.life += 1
+
+        if (this.life < 3) {
+            this.life += 1
+        }
+
+        window.setTimeout(() => {
+            this.heal = false
+        }, 1_000)
+
+        return true
 
     }
 
@@ -128,6 +137,10 @@ class Character {
         
         if (!this.movements.isShutting) {
             this.movements.isShutting = true
+
+            const shootSound = document.getElementById('shootSound')
+            shootSound.play()
+            shootSound.volume = 0.1
 
             this.bullets.push(new Bullet(this.ctx, this.x + Math.ceil(this.w / 2), this.y + Math.ceil(this.h / 2), movement))
             

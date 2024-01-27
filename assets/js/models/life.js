@@ -24,15 +24,15 @@ class Life {
         }
     }
 
-    decrement() {
+    decrement() {  
         this.sprite.verticalFrameIndex += 1
 
     }
-    
+
     increment() {
         this.sprite.verticalFrameIndex -= 1
 
-        if (this.sprite.verticalFrameIndex < this.sprite.verticalFrames - 1) {
+        if (this.sprite.verticalFrameIndex < 0) {
             this.sprite.verticalFrameIndex = 0
         }
 

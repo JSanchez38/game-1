@@ -27,12 +27,6 @@ window.addEventListener('load', () => {
         play.addEventListener('click', () => game.start())
         pause.addEventListener('click', () => game.stop())
 
-        
-        const backgroundMusic = document.getElementById('backgroundMusic');
-        backgroundMusic.play();
-        backgroundMusic.volume = 0.2
-
-
         })
 
         const tryAgain = document.getElementById('btn-retry')

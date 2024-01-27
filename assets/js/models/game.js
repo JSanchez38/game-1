@@ -6,6 +6,7 @@ class Game {
         this.ctx = this.canvas.getContext('2d')
 
         this.drawIntervalId = undefined
+        
         this.fps = FPS_GAME
 
         this.background = new Background(this.ctx)
@@ -21,8 +22,7 @@ class Game {
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
-        setInterval(() => this.spawnDrop(), 15000)
-
+        setInterval(() => this.spawnDrop(), 3000)
 
     }
 
@@ -32,13 +32,18 @@ class Game {
 
     start() {
         if (!this.drawIntervalId) {
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            backgroundMusic.play();
+            backgroundMusic.volume = 0.15
+
+            this.timer.start()
+
             this.drawIntervalId = setInterval(() => {
                 this.clear()
                 this.move()
                 this.draw()
                 this.checkCollisions()
             }, this.fps)
-            this.timer.start()
         }
     }
 
@@ -48,7 +53,11 @@ class Game {
 
                 if (this.character.hit()) {
                     this.life.decrement()
-                    
+
+                    const hittedSound = document.getElementById('hittedSound')
+                    hittedSound.play()
+                    hittedSound.volume = 0.2
+
                 }
                 
                 if (this.character.life <= 0) {
@@ -58,17 +67,30 @@ class Game {
         })
 
         this.drops.forEach((drop) => {
-            if (drop.collidesWith(this.character)) {
-                this.life.increment()
-                this.character.healing()
-            }
-        })
+            if (drop.collidesWith(this.character))
+                
+                if (this.character.healing()) {
+                    this.life.increment()
 
+                    const healSound = document.getElementById('healSound')
+                    healSound.play()
+                    healSound.volume = 0.05
+
+                }
+                
+            
+        })
+        
         this.bosses.forEach((boss) => {
             if (boss.collidesWith(this.character)) {
                 
                 if (this.character.hit()) {
                     this.life.decrement()
+
+                    const hittedSound = document.getElementById('hittedSound')
+                    hittedSound.play()
+                    hittedSound.volume = 0.2
+
                 }
 
                 if (this.character.life <= 0) {
@@ -94,6 +116,7 @@ class Game {
                 if (boss.collidesWith(bullet)) {
                     boss.lives--
                     this.score.bossInc()
+
                     return false
                 }
             }
@@ -171,8 +194,6 @@ class Game {
         }
     }
 
-
-
     spawnDrop() {
         
         const randomX = Math.floor(Math.random() * (this.canvas.width + 50));
@@ -186,9 +207,10 @@ class Game {
             clearInterval(this.drawIntervalId)
             this.drawIntervalId = undefined
 
+            this.timer.stop()
+
             const backgroundMusic = document.getElementById('backgroundMusic');
             backgroundMusic.pause();
-
 }
 
     draw() {
@@ -230,6 +252,10 @@ class Game {
 
     gameOver() {
             this.stop()
+
+            const gameOverSound = document.getElementById('gameOverSound')
+            gameOverSound.play()
+            gameOverSound.volume = 0.05
 
         const gameOver = document.getElementById('end-panel')
         gameOver.classList.remove('hidden')
