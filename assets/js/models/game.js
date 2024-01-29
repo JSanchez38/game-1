@@ -19,8 +19,6 @@ class Game {
         this.drops = []
         this.finalBosses = []
 
-        this.leaderboad = []
-
         this.addEnemyBackoff = 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
@@ -219,7 +217,7 @@ class Game {
 
         }
 
-        this.addEnemyBackoff = Math.floor(Math.random() * 3) * 1000
+        this.addEnemyBackoff = Math.floor(Math.random() * 2.5) * 1000
         setTimeout(() => this.addRandomEnemy(), this.addEnemyBackoff)
 
 
@@ -294,9 +292,6 @@ class Game {
 
     gameOver() {
             this.stop()
-
-            this.leaderboad.push(`${this.timer.minutes} : ${this.timer.seconds}`)
-            console.log(this.leaderboad)
 
             const gameOverSound = document.getElementById('gameOverSound')
             gameOverSound.play()
